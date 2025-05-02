@@ -9,18 +9,18 @@ import { persistReducer, persistStore } from 'redux-persist';
 const persistConfig = {
   key: 'saved-contacts',
   storage,
-  whitelist: ['contacts'],
+  whitelist: ['items'],
 };
 
+const persistedContactsReducer = persistReducer(persistConfig, contactsReducer);
+
 const rootReducer = combineReducers({
-  contacts: contactsReducer,
+  contacts: persistedContactsReducer,
   filters: filterReducer,
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),
 });
