@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import css from './App.module.css';
 import ContactForm from './components/ContactForm/ContactForm';
 import ContactList from './components/ContactList/ContactList';
@@ -31,9 +31,12 @@ function App() {
     });
   };
 
-  const filteredContacts = contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(query.toLowerCase())
-  );
+  const filteredContacts = useMemo(() => {
+    console.log('FILTER CONTACTS');
+    return contacts.filter((contact) =>
+      contact.name.toLowerCase().includes(query.toLowerCase())
+    );
+  }, [contacts, query]);
 
   useEffect(() => {
     window.localStorage.setItem('saved-contacts', JSON.stringify(contacts));
