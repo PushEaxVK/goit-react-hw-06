@@ -32,7 +32,6 @@ function App() {
   };
 
   const filteredContacts = useMemo(() => {
-    console.log('FILTER CONTACTS');
     return contacts.filter((contact) =>
       contact.name.toLowerCase().includes(query.toLowerCase())
     );

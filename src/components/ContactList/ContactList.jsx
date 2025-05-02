@@ -15,4 +15,5 @@ const ContactList = ({ list, handleRemoveContact }) => {
     </ul>
   );
 };
+
 export default ContactList;
